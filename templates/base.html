@@ -1,0 +1,13 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Weather4u{% endblock %}</title>
+    {% load static %}
+    <link href="{% static 'css/output.css' %}" rel="stylesheet"/>
+</head>
+<body class="bg-base-200 text-base-content p-6">
+{% block content %}
+    <!-- Child templates will inject here -->
+{% endblock %}
+</body>
+</html>
