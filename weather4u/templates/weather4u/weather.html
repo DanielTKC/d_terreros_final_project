@@ -7,5 +7,7 @@
         <p><strong>Weather for:</strong> {{ result.city }}, {{ result.zipcode }}</p>
         <p><strong>Current Temperature:</strong> {{ result.weather.current.temp }} °F</p>
         <p><strong>Condition:</strong> {{ result.weather.current.weather.0.description }}</p>
+        <img src="https://openweathermap.org/img/wn/{{ result.icon }}@2x.png" alt="Weather Icon">
+
     {% endif %}
 {% endblock %}

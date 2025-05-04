@@ -46,6 +46,7 @@ def weather(request):
                         "lat": lat,
                         "lon": lon,
                         "weather": weather_data,
+                        "icon" : weather_data["current"]["weather"][0]["icon"],
                     }
                     print(result)
                     cache.set(cache_key, result, timeout=1300)
