@@ -1,8 +1,10 @@
 import datetime
 import requests
+import pytz
 from django.shortcuts import render
 from django.conf import settings
 from django.core.cache import cache
+
 
 def home(request):
     return render(request, 'weather4u/index.html')
@@ -17,7 +19,6 @@ def weather(request):
         # Cache it so we don't have to call the API every time
         cache_key = f"weather:{zipcode}"
         result = cache.get(cache_key)
-
 
         if not result:
             print(f"[Cache MISS] Fetching data for ZIP {zipcode}")
@@ -38,8 +39,27 @@ def weather(request):
 
                 if weather_response.status_code == 200:
                     weather_data = weather_response.json()
-                    current_dt = datetime.datetime.fromtimestamp(weather_data["current"]["dt"])
+                    timezone_name = weather_data.get("timezone", "UTC")
+                    local_timezone = pytz.timezone(timezone_name)
+                    current_dt = datetime.datetime.fromtimestamp(weather_data["current"]["dt"], tz=local_timezone)
                     day_str = current_dt.strftime("%a")
+                    now = datetime.datetime.now().timestamp()
+
+
+
+                    next_12_hours = []
+                    for hour in weather_data["hourly"]:
+                        if hour["dt"] > now:
+                            hour_dt = datetime.datetime.fromtimestamp(hour["dt"], tz=local_timezone)
+                            time = hour_dt.strftime("%I %p").lstrip("0")
+                            next_12_hours.append({
+                                "time": time,
+                                "temp": round(hour["temp"]),
+                                "description": hour["weather"][0]["description"].capitalize(),
+                                "icon": hour["weather"][0]["icon"],
+                            })
+                        if len(next_12_hours) == 12:
+                            break
                     result = {
                         "zipcode": zipcode,
                         "city": city_data.get("name", "Unknown"),
@@ -48,8 +68,10 @@ def weather(request):
                         "lat": lat,
                         "lon": lon,
                         "weather": weather_data,
-                        "icon" : weather_data["current"]["weather"][0]["icon"],
-                        "day": day_str
+                        "icon": weather_data["current"]["weather"][0]["icon"],
+                        "day": day_str,
+                        "next_12_hours": next_12_hours,
+
                     }
                     print(result)
                     cache.set(cache_key, result, timeout=1300)
