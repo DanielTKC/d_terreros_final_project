@@ -17,7 +17,7 @@ def weather(request):
     result = get_weather_data(zipcode) if zipcode else None
     return render(request, "weather4u/weather.html", {"result": result})
 
-def five_day_forecast(request):
+def five_day(request):
     zipcode = request.GET.get('zipcode')
     result = get_weather_data(zipcode) if zipcode else None
     return render(request, "weather4u/five_day.html", {"result": result})
