@@ -8,6 +8,7 @@ from django.conf import settings
 from django.core.cache import cache
 
 
+
 def home(request):
     return render(request, 'weather4u/index.html')
 
