@@ -2,7 +2,8 @@
 {% load static %}
 {% block content %}
     <div class="relative min-h-[30rem] w-full mx-auto px-6 py-10 bg-white rounded-xl shadow-lg">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">What to Wear Today</h2>
+        <h1 class="text-3xl font-bold text-gray-900 mb-6">What to Wear Today</h1>
+        <h3><a href="{% url 'weather4u:five_day' %}?zipcode={{ result.zipcode }}" class="text-blue-400 underline hover:text-blue-200">Back to Forecast</a></h3>
 
         <ul role="list" class="divide-y divide-gray-200">
 
@@ -46,7 +47,7 @@
                     <div class="hidden sm:flex sm:flex-col sm:items-end">
                         <p class="text-sm font-medium text-gray-900">Suggested:</p>
                         <ul class="list-disc list-inside text-sm text-gray-600">
-                            {% for item in clothing.today %}
+                            {% for item in day.outfit %}
                                 <li>
                                     {{ item.name }}
                                 </li>

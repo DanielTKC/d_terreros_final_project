@@ -35,20 +35,23 @@ def what_to_wear(request):
 
     if result:
         weather = result["weather"]
+        condition = weather["current"]["weather"][0]["main"].lower()
         local_timezone = pytz.timezone(result["timezone"])
+        uvi = weather["current"].get("uvi", 0)
+
 
         temp = weather["current"]["temp"]
-        clothing["today"] = get_model_clothing_recommendations(temp)
+        clothing["today"] = get_model_clothing_recommendations(temp, condition, uvi)
 
         # Next 5 days
         for day in weather["daily"][:5]:
             dt = datetime.datetime.fromtimestamp(day["dt"], tz=local_timezone)
-            avg_temp = (day["temp"]["max"] + day["temp"]["min"]) / 2
+            avg_temp = (day["temp"]["max"] + day["temp"]["min"]) / 1.7
             icon = day["weather"][0]["icon"]
             desc = day["weather"][0]["description"]
 
 
-            outfit = get_model_clothing_recommendations(avg_temp)
+            outfit = get_model_clothing_recommendations(avg_temp, condition, uvi)
 
             clothing["next_5_days"].append({
                 "name": dt.strftime("%A"),
@@ -143,17 +146,25 @@ def get_weather_data(zipcode):
     cache.set(cache_key, result, timeout=1300)
     return result
 
-def get_model_clothing_recommendations(temp):
+def get_model_clothing_recommendations(temp, condition, uvi):
+
     categories = []
 
     if temp >= 85:
         categories.append("hot")
-    elif temp >= 70:
+    elif temp >= 75:
         categories.append("warm")
     elif temp >= 55:
         categories.append("cool")
     else:
         categories.append("cold")
+
+    if "rain" in condition:
+        categories.append("rain")
+    if "snow" in condition:
+        categories.append("snow")
+    if uvi >= 6:
+        categories.append("uv_high")
 
     return ClothingItem.objects.filter(categories__name__in=categories).distinct()
 

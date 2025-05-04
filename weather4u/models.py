@@ -16,3 +16,17 @@ class ClothingItem(models.Model):
     def __str__(self):
         return self.name
 
+class ActivityCategory(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    def __str__(self):
+        return self.name
+
+class Activity(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    min_temp = models.IntegerField()
+    max_temp = models.IntegerField()
+    categories = models.ManyToManyField(ActivityCategory, related_name="activities")
+
+    def __str__(self):
+        return self.name
