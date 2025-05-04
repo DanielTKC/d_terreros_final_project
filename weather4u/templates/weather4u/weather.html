@@ -60,20 +60,26 @@
                     </div>
                     <div class="relative max-lg:row-start-1">
                         <div class="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]"></div>
-                        <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
-                            <div class="px-8 pt-8 sm:px-10 sm:pt-10">
-                                <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
-                                    What To Wear Right Now</p>
-                                <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">Not sure what to
-                                    wear
-                                    with the weather? Click here and get some suggestions!</p>
+                        <a href="{% url 'weather4u:what_to_wear' %}?zipcode={{ result.zipcode }}"
+                           class="group relative block hover:opacity-95 transition duration-200">
+                            <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] bg-white shadow hover:shadow-lg">
+                                <div class="px-8 pt-8 sm:px-10 sm:pt-10">
+                                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
+                                        What To Wear Right Now
+                                    </p>
+                                    <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
+                                        Not sure what to wear with the weather? Click here and get some suggestions!
+                                    </p>
+                                </div>
+                                <div class="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
+                                    <img class="w-full max-lg:max-w-xs p-2"
+                                         src="{% static 'img/fashion-1979136_1280.jpg' %}"
+                                         alt="">
+                                </div>
                             </div>
-                            <div class="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
-                                <img class="w-full max-lg:max-w-xs p-2"
-                                     src="{% static 'img/fashion-1979136_1280.jpg' %}"
-                                     alt="">
-                            </div>
-                        </div>
+                            <!-- Optional: invisible overlay for full-area clickability -->
+                            <span class="absolute inset-0" aria-hidden="true"></span>
+                        </a>
                         <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-t-[2rem]"></div>
                     </div>
                     <div class="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
@@ -98,7 +104,8 @@
                         <div class="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
                         <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
                             <div class="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
-                                <a href="{% url 'weather4u:five_day' %}?zipcode={{ result.zipcode }}" class="text-blue-400 underline hover:text-blue-200">See 5-Day Forecast →</a>
+                                <a href="{% url 'weather4u:five_day' %}?zipcode={{ result.zipcode }}"
+                                   class="text-blue-400 underline hover:text-blue-200">See 5-Day Forecast →</a>
                             </div>
                             <div class="relative min-h-[30rem] w-full grow">
                                 <div class="absolute top-10 right-0 bottom-0 left-10 overflow-hidden rounded-tl-xl bg-gray-900 shadow-2xl">

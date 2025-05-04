@@ -6,6 +6,7 @@ import pytz
 from django.shortcuts import render
 from django.conf import settings
 from django.core.cache import cache
+from .models import ClothingItem
 
 
 
@@ -22,6 +23,44 @@ def five_day(request):
     zipcode = request.GET.get('zipcode')
     result = get_weather_data(zipcode) if zipcode else None
     return render(request, "weather4u/five_day.html", {"result": result})
+
+def what_to_wear(request):
+    zipcode = request.GET.get("zipcode")
+    result = get_weather_data(zipcode) if zipcode else None
+
+    clothing = {
+        "today": [],
+        "next_5_days": []
+    }
+
+    if result:
+        weather = result["weather"]
+        local_timezone = pytz.timezone(result["timezone"])
+
+        temp = weather["current"]["temp"]
+        clothing["today"] = get_model_clothing_recommendations(temp)
+
+        # Next 5 days
+        for day in weather["daily"][:5]:
+            dt = datetime.datetime.fromtimestamp(day["dt"], tz=local_timezone)
+            avg_temp = (day["temp"]["max"] + day["temp"]["min"]) / 2
+            icon = day["weather"][0]["icon"]
+            desc = day["weather"][0]["description"]
+
+
+            outfit = get_model_clothing_recommendations(avg_temp)
+
+            clothing["next_5_days"].append({
+                "name": dt.strftime("%A"),
+                "temp_min": round(day["temp"]["min"]),
+                "temp_max": round(day["temp"]["max"]),
+                "description": desc.capitalize(),
+                "icon": icon,
+                "outfit": outfit
+            })
+
+    return render(request, "weather4u/what_to_wear.html", {"result": result, "clothing": clothing})
+
 
 
 def get_weather_data(zipcode):
@@ -103,3 +142,18 @@ def get_weather_data(zipcode):
 
     cache.set(cache_key, result, timeout=1300)
     return result
+
+def get_model_clothing_recommendations(temp):
+    categories = []
+
+    if temp >= 85:
+        categories.append("hot")
+    elif temp >= 70:
+        categories.append("warm")
+    elif temp >= 55:
+        categories.append("cool")
+    else:
+        categories.append("cold")
+
+    return ClothingItem.objects.filter(categories__name__in=categories).distinct()
+
