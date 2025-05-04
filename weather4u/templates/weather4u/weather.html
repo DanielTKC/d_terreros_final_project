@@ -84,20 +84,23 @@
                     </div>
                     <div class="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
                         <div class="absolute inset-px rounded-lg bg-white"></div>
-                        <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
-                            <div class="px-8 pt-8 sm:px-10 sm:pt-10">
-                                <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
-                                    What to do today</p>
-                                <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">Activities to do
-                                    based
-                                    on the weather.</p>
+                        <a href="{% url 'weather4u:what_to_do' %}?zipcode={{ result.zipcode }}"
+                           class="group relative block hover:opacity-95 transition duration-200">
+                            <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
+                                <div class="px-8 pt-8 sm:px-10 sm:pt-10">
+                                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
+                                        What to do today</p>
+                                    <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">Activities to do
+                                        based
+                                        on the weather.</p>
+                                </div>
+                                <div class="@container flex flex-1 items-center max-lg:py-6 lg:pb-2">
+                                    <img class="h-[min(152px,40cqw)] object-cover"
+                                         src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-security.png"
+                                         alt="">
+                                </div>
                             </div>
-                            <div class="@container flex flex-1 items-center max-lg:py-6 lg:pb-2">
-                                <img class="h-[min(152px,40cqw)] object-cover"
-                                     src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-security.png"
-                                     alt="">
-                            </div>
-                        </div>
+                        </a>
                         <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5"></div>
                     </div>
                     <div class="relative lg:row-span-2">

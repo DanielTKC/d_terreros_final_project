@@ -4309,6 +4309,9 @@
       gap: calc(0.25rem * 4);
     }
   }
+  .m-10 {
+    margin: calc(var(--spacing) * 10);
+  }
   .filter {
     display: flex;
     flex-wrap: wrap;

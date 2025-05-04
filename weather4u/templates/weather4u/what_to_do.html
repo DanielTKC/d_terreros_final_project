@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="relative min-h-[30rem] m-10 w-full mx-auto px-6 py-10 bg-white rounded-xl shadow-lg">
+        <h1 class="text-3xl font-bold text-gray-900 mb-6">What to Do Today</h1>
+        <h3><a href="{% url 'weather4u:five_day' %}?zipcode={{ result.zipcode }}" class="text-blue-400 underline hover:text-blue-200">Back to Forecast</a></h3>
+
+        <ul role="list" class="divide-y divide-gray-200">
+
+            <li class="flex justify-between gap-x-6 py-6">
+                <div class="flex min-w-0 gap-x-4">
+                    <img class="size-12 flex-none rounded-full bg-gray-100"
+                         src="https://openweathermap.org/img/wn/{{ result.icon }}@2x.png" alt="">
+                    <div class="min-w-0 flex-auto">
+                        <p class="text-lg font-semibold text-gray-900">Today in {{ result.city }}</p>
+                        <p class="mt-1 text-sm text-gray-500">
+                            {{ result.weather.current.temp|floatformat:0 }}°F
+                            — {{ result.weather.current.weather.0.description }}
+                        </p>
+
+                    </div>
+                </div>
+                <div class="hidden sm:flex sm:flex-col sm:items-end">
+                    <p class="text-sm font-medium text-gray-900">Recommended:</p>
+                    <ul class="list-disc list-inside text-sm text-gray-600">
+                        {% for item in activities.today %}
+                            <li>
+                                {{ item.name }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </li>
+
+
+            {% for day in activities.next_5_days %}
+                <li class="flex justify-between gap-x-6 py-6">
+                    <div class="flex min-w-0 gap-x-4">
+                        <img class="size-12 flex-none rounded-full bg-gray-100"
+                             src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="{{ day.description }}">
+                        <div class="min-w-0 flex-auto">
+                            <p class="text-lg font-semibold text-gray-900">{{ day.name }}</p>
+                            <p class="mt-1 text-sm text-gray-500">{{ day.temp_min }}°F – {{ day.temp_max }}°F
+                                — {{ day.description }}</p>
+                        </div>
+                    </div>
+                    <div class="hidden sm:flex sm:flex-col sm:items-end">
+                        <p class="text-sm font-medium text-gray-900">Suggested:</p>
+                        <ul class="list-disc list-inside text-sm text-gray-600">
+                            {% for item in day.recs %}
+                                <li>
+                                    {{ item.name }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

@@ -8,4 +8,6 @@ urlpatterns = [
     path("weather/", views.weather, name="weather"),
     path('five-day/', views.five_day, name='five_day'),
     path("what-to-wear/", views.what_to_wear, name="what_to_wear"),
+
+    path("what-to-do/", views.what_to_do, name="what_to_do"),
 ]

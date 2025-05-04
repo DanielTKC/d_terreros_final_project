@@ -7,6 +7,8 @@ from django.shortcuts import render
 from django.conf import settings
 from django.core.cache import cache
 from .models import ClothingItem
+from .models import Activity
+
 
 
 
@@ -63,6 +65,43 @@ def what_to_wear(request):
             })
 
     return render(request, "weather4u/what_to_wear.html", {"result": result, "clothing": clothing})
+
+def what_to_do(request):
+    zipcode = request.GET.get("zipcode")
+    result = get_weather_data(zipcode) if zipcode else None
+
+    activities = {
+        "today": [],
+        "next_5_days": []
+    }
+
+    if result:
+        weather = result["weather"]
+        local_timezone = pytz.timezone(result["timezone"])
+
+        temp = weather["current"]["temp"]
+        condition = weather["current"]["weather"][0]["main"]
+        activities["today"] = get_activity_recommendations(temp, condition)
+
+        for day in weather["daily"][:5]:
+            dt = datetime.datetime.fromtimestamp(day["dt"], tz=local_timezone)
+            avg_temp = (day["temp"]["max"] + day["temp"]["min"]) / 2
+            condition = day["weather"][0]["main"]
+            icon = day["weather"][0]["icon"]
+            desc = day["weather"][0]["description"]
+
+            recs = get_activity_recommendations(avg_temp, condition)
+
+            activities["next_5_days"].append({
+                "name": dt.strftime("%A"),
+                "temp_min": round(day["temp"]["min"]),
+                "temp_max": round(day["temp"]["max"]),
+                "description": desc.capitalize(),
+                "icon": icon,
+                "recs": recs,
+            })
+
+    return render(request, "weather4u/what_to_do.html", {"result": result, "activities": activities})
 
 
 
@@ -167,4 +206,31 @@ def get_model_clothing_recommendations(temp, condition, uvi):
         categories.append("uv_high")
 
     return ClothingItem.objects.filter(categories__name__in=categories).distinct()
+
+def get_activity_recommendations(temp, condition):
+    condition = condition.lower()
+
+    if "snow" in condition:
+        category_name = "snow"
+    elif "light rain" in condition:
+        category_name = "light_rain"
+    elif "rain" in condition:
+        category_name = "rain"
+    elif any(word in condition for word in ["clear", "clouds", "sun"]):
+        category_name = "sunny"
+    else:
+        category_name = None
+
+    if not category_name:
+        return []
+
+    activities = Activity.objects.filter(categories__name=category_name)
+    matching = []
+    for activity in activities:
+        print(activity.name, activity.min_temp, activity.max_temp)
+
+        if activity.min_temp - 10 <= temp <= activity.max_temp:
+            matching.append(activity)
+
+    return matching
 
