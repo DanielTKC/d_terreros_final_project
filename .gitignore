@@ -322,7 +322,8 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 weather4u/static/css/tailwindcss
-
+/weather4u/static/css/tailwindcss
+weather4u/API_KEY
 
 # End of https://www.toptal.com/developers/gitignore/api/python,macos,pycharm
-/weather4u/static/css/tailwindcss
+
