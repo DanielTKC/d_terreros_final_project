@@ -17,6 +17,11 @@ def weather(request):
     result = get_weather_data(zipcode) if zipcode else None
     return render(request, "weather4u/weather.html", {"result": result})
 
+def five_day_forecast(request):
+    zipcode = request.GET.get('zipcode')
+    result = get_weather_data(zipcode) if zipcode else None
+    return render(request, "weather4u/five_day.html", {"result": result})
+
 
 def get_weather_data(zipcode):
     API_KEY = settings.API_KEY
