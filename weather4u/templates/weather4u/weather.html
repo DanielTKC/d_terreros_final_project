@@ -1,13 +1,126 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-    <h2>Weather Info</h2>
     {% if weather_data.error %}
         <p>{{ weather_data.error }}</p>
     {% else %}
-        <p><strong>Weather for:</strong> {{ result.city }}, {{ result.zipcode }}</p>
-        <p><strong>Current Temperature:</strong> {{ result.weather.current.temp }} °F</p>
-        <p><strong>Condition:</strong> {{ result.weather.current.weather.0.description }}</p>
-        <img src="https://openweathermap.org/img/wn/{{ result.icon }}@2x.png" alt="Weather Icon">
+        <div class="bg-gray-50 py-24 sm:py-32">
+            <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+                <div class="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
+                    <div class="relative lg:row-span-2">
+                        <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
+                        <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
+                            <div class="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
+                                <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
+                                    Current Weather in {{ result.city }}:</p>
 
+                            </div>
+                            <div class="@container relative min-h-[30rem] w-full grow max-lg:mx-auto max-lg:max-w-sm">
+                                <div class="absolute inset-x-10 top-10 bottom-0 overflow-hidden rounded-t-[12cqw] border-x-[3cqw] border-t-[3cqw] border-gray-700 bg-gray-900 shadow-2xl">
+                                    <div class="flex flex-col items-center justify-between h-full text-white px-4 py-6">
+
+                                        <p class="text-xl font-bold tracking-widest">{{ result.day }} </p>
+
+
+                                        <div class="mt-4 mb-2">
+                                            <img class="w-20 h-20"
+                                                 src="https://openweathermap.org/img/wn/{{ result.weather.current.weather.0.icon }}@2x.png"
+                                                 alt="Weather icon">
+                                        </div>
+                                        <p class="text-3xl font-bold mt-2">
+                                            {{ result.weather.current.temp|floatformat:0 }}°F
+                                        </p>
+
+
+                                        <p class="text-lg font-semibold text-center capitalize">
+                                            {{ result.weather.current.weather.0.description }}
+                                        </p>
+                                        <p class="text-md text-blue-200 mt-1">
+                                            Humidity: {{ result.weather.current.humidity }}%
+                                        </p>
+
+
+                                        <div class="flex justify-between w-full mt-6 text-lg font-bold tracking-wider">
+                                            <div class="text-left">
+                                                <p class="text-blue-300">Lo</p>
+                                                <p>{{ result.weather.daily.0.temp.min|floatformat:0 }}°</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-yellow-300">Hi</p>
+                                                <p>{{ result.weather.daily.0.temp.max|floatformat:0 }}°</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-l-[2rem]"></div>
+                    </div>
+                    <div class="relative max-lg:row-start-1">
+                        <div class="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]"></div>
+                        <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
+                            <div class="px-8 pt-8 sm:px-10 sm:pt-10">
+                                <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
+                                    What To Wear Right Now</p>
+                                <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">Not sure what to
+                                    wear
+                                    with the weather? Click here and get some suggestions!</p>
+                            </div>
+                            <div class="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
+                                <img class="w-full max-lg:max-w-xs p-2"
+                                     src="{% static 'img/fashion-1979136_1280.jpg' %}"
+                                     alt="">
+                            </div>
+                        </div>
+                        <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-t-[2rem]"></div>
+                    </div>
+                    <div class="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
+                        <div class="absolute inset-px rounded-lg bg-white"></div>
+                        <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
+                            <div class="px-8 pt-8 sm:px-10 sm:pt-10">
+                                <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
+                                    Security</p>
+                                <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">Morbi viverra dui mi
+                                    arcu sed. Tellus semper adipiscing suspendisse semper morbi.</p>
+                            </div>
+                            <div class="@container flex flex-1 items-center max-lg:py-6 lg:pb-2">
+                                <img class="h-[min(152px,40cqw)] object-cover"
+                                     src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-security.png"
+                                     alt="">
+                            </div>
+                        </div>
+                        <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5"></div>
+                    </div>
+                    <div class="relative lg:row-span-2">
+                        <div class="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
+                        <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
+                            <div class="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
+                                <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
+                                    Powerful APIs</p>
+                                <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">Sit quis amet rutrum
+                                    tellus ullamcorper ultricies libero dolor eget sem sodales gravida.</p>
+                            </div>
+                            <div class="relative min-h-[30rem] w-full grow">
+                                <div class="absolute top-10 right-0 bottom-0 left-10 overflow-hidden rounded-tl-xl bg-gray-900 shadow-2xl">
+                                    <div class="flex bg-gray-800/40 ring-1 ring-white/5">
+                                        <div class="-mb-px flex text-sm/6 font-medium text-gray-400">
+                                            <div class="border-r border-b border-r-white/10 border-b-white/20 bg-white/5 px-4 py-2 text-white">
+                                                NotificationSetting.jsx
+                                            </div>
+                                            <div class="border-r border-gray-600/10 px-4 py-2">App.jsx</div>
+                                        </div>
+                                    </div>
+                                    <div class="px-6 pt-6 pb-14">
+                                        <!-- Your code example -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}

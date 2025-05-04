@@ -38,6 +38,8 @@ def weather(request):
 
                 if weather_response.status_code == 200:
                     weather_data = weather_response.json()
+                    current_dt = datetime.datetime.fromtimestamp(weather_data["current"]["dt"])
+                    day_str = current_dt.strftime("%a")
                     result = {
                         "zipcode": zipcode,
                         "city": city_data.get("name", "Unknown"),
@@ -47,6 +49,7 @@ def weather(request):
                         "lon": lon,
                         "weather": weather_data,
                         "icon" : weather_data["current"]["weather"][0]["icon"],
+                        "day": day_str
                     }
                     print(result)
                     cache.set(cache_key, result, timeout=1300)
