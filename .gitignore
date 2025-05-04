@@ -325,3 +325,4 @@ weather4u/static/css/tailwindcss
 
 
 # End of https://www.toptal.com/developers/gitignore/api/python,macos,pycharm
+/weather4u/static/css/tailwindcss

@@ -1,3 +1,5 @@
-@import "tailwindcss" source(none);
-@plugin "./daisyui.js";
+@import "tailwindcss";
+@plugin "./daisyui.js"{
+    themes: sunset --default;
+}
 @source "../../templates";
