@@ -74,6 +74,17 @@ def get_weather_data(zipcode):
         if len(next_12_hours) == 12:
             break
 
+    next_5_days = []
+    for day in weather_data["daily"][:5]:
+        dt = datetime.datetime.fromtimestamp(day["dt"], tz=local_timezone)
+        next_5_days.append({
+            "name": dt.strftime("%A"),
+            "temp_min": round(day["temp"]["min"]),
+            "temp_max": round(day["temp"]["max"]),
+            "description": day["weather"][0]["description"].capitalize(),
+            "icon": day["weather"][0]["icon"],
+        })
+
     result = {
         "zipcode": zipcode,
         "city": city_data.get("name", "Unknown"),
@@ -85,6 +96,7 @@ def get_weather_data(zipcode):
         "icon": weather_data["current"]["weather"][0]["icon"],
         "day": day_str,
         "next_12_hours": next_12_hours,
+        "next_5_days": next_5_days,
         "timezone": timezone_name,
     }
 
