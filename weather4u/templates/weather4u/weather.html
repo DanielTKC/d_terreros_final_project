@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Weather Info</h2>
+    {% if weather_data.error %}
+        <p>{{ weather_data.error }}</p>
+    {% else %}
+        <p><strong>Weather for:</strong> {{ result.city }}, {{ result.zipcode }}</p>
+        <p><strong>Current Temperature:</strong> {{ result.weather.current.temp }} °F</p>
+        <p><strong>Condition:</strong> {{ result.weather.current.weather.0.description }}</p>
+    {% endif %}
+{% endblock %}
