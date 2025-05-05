@@ -1,9 +1,9 @@
 import datetime
-from urllib import request
-
 import requests
 import pytz
-from django.shortcuts import render
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.core.cache import cache
 from .models import ClothingItem
@@ -11,6 +11,16 @@ from .models import Activity
 
 
 
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("weather4u:index")
+    else:
+        form = UserCreationForm()
+    return render(request, "weather4u/register.html", {"form": form})
 
 def home(request):
     return render(request, 'weather4u/index.html')

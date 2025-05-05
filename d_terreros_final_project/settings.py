@@ -89,6 +89,9 @@ CACHES = {
     }
 }
 
+LOGIN_REDIRECT_URL = 'weather4u:index'
+LOGIN_URL = 'weather4u:login'
+LOGOUT_REDIRECT_URL = 'weather4u:index'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
