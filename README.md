@@ -23,6 +23,7 @@ for the user, and a pages that will help the user decide what to wear based on t
 
 # There is a file named API_KEY2 that is currently blank. I have attached my API for openweathermap in my submission to blackboard.
 ## You will need to copy that string as is and paste it into the API_KEY2 file.
+### It is located at d_terreros_final_project/weather4u/API_KEY2
 
 ### Dependencies
 
