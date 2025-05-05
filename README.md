@@ -21,8 +21,8 @@ for the user, and a pages that will help the user decide what to wear based on t
 
 ## Getting Started
 
-There is a file named API_KEY2 that is currently blank. I have attached my API for openweathermap in my submission to blackboard.
-You will need to copy that string as is and paste it into the API_KEY2 file.
+# There is a file named API_KEY2 that is currently blank. I have attached my API for openweathermap in my submission to blackboard.
+## You will need to copy that string as is and paste it into the API_KEY2 file.
 
 ### Dependencies
 
@@ -65,18 +65,20 @@ python manage.py runserver
 Then, open your browser and navigate to:
 http://127.0.0.1:8000
 
+# WHEN CREATING A USER YOU MUST HAVE A NINE CHARACTER LONG PASSWORD MINIMUM
+
 ### Notable additions
-Sign up and registrations using Django's built-in auth.
-Fully responsive design
-Daisy UI for some components.
-Tailwind CSS for styling; using tailwind components for UI
-Zipcode lookup using the OpenWeatherMap API
-Fully responsive design
-Based on weather conditions, temperature, and uv index, the user will be given suggestions on what to wear and what to do.
-A basic user profile
-Fair Use Images
-Pytz Library for timezone conversion
-A dynamic favicon that changes based on the weather
+*Sign up and registrations using Django's built-in auth.
+*Fully responsive design
+*Daisy UI for some components.
+*Tailwind CSS for styling; using tailwind components for UI
+*Zipcode lookup using the OpenWeatherMap API
+*Fully responsive design
+*Based on weather conditions, temperature, and uv index, the user will be given suggestions on what to wear and what to do.
+*A basic user profile
+*Fair Use Images
+*Pytz Library for timezone conversion
+*A dynamic favicon that changes based on the weather
 
 
 
