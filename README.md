@@ -10,6 +10,9 @@ for the user, and a pages that will help the user decide what to wear based on t
 
 ## Getting Started
 
+There is a file named API_KEY2 that is currently blank. I have attached my API for openweathermap in my submission to blackboard.
+You will need to copy that string as is and paste it into the API_KEY2 file.
+
 ### Dependencies
 
 ```
@@ -52,10 +55,17 @@ Then, open your browser and navigate to:
 http://127.0.0.1:8000
 
 ### Notable additions
-* An About us section
-* An events section
-* The ability to Login
-* Register accounts using djangos built in registration system.
+Sign up and registrations using Django's built-in auth.
+Fully responsive design
+Daisy UI for some components.
+Tailwind CSS for styling; using tailwind components for UI
+Zipcode lookup using the OpenWeatherMap API
+Fully responsive design
+Based on weather conditions, temperature, and uv index, the user will be given suggestions on what to wear and what to do.
+A basic user profile
+Fair Use Images
+Pytz Library for timezone conversion
+A dynamic favicon that changes based on the weather
 
 
 
@@ -64,7 +74,13 @@ http://127.0.0.1:8000
 Daniel Terreros
 
 ## Acknowledgements
-* [Django Login, Logout ](https://learndjango.com/tutorials/django-login-and-logout-tutorial)
-* [Register page usercreationform](https://dev.to/balt1794/registration-page-using-usercreationform-django-part-2-2fg)
-* [Bootstrap](https://getbootstrap.com/)
+* [Daisy UI with TailwindCLI](https://https://daisyui.com/docs/install/django/)
+* [Three Column Bento Grid From Tailwind CSS](https://tailwindcss.com/plus/ui-blocks/preview)
+* [Tailwind Sign up and Registration inspiration](https://tailwindcss.com/plus/ui-blocks/application-ui/forms/sign-in-forms)
+* [Stacked lists with Tailwind that were used for clothing and activity suggestions](https://tailwindcss.com/plus/ui-blocks/application-ui/lists/stacked-lists)
+* [How to install Pytz in Python](https://www.geeksforgeeks.org/how-to-install-pytz-in-python/)
+* [More help with Pytz](https://www.youtube.com/watch?v=3B5oInYNb5c)
+* [Double underscores and Djangos ORM](https://stackoverflow.com/questions/21319832/what-do-double-underscores-indicate)
+* [The origin of the dynamic favicon](https://www.geeksforgeeks.org/how-to-change-favicon-dynamically/)
+* [Inspiration for initial development with open weather api](https://www.youtube.com/watch?v=lyeK0aE_qRg)
 * [Previous django project from awhile ago that helped me remember how to do some of this stuff!](https://github.com/DanielTKC/current_club)

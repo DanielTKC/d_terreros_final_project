@@ -138,5 +138,5 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # API KEY LOOKUP
-API_KEY = open(os.path.join(BASE_DIR, 'weather4u', 'API_KEY')).read().strip()
+API_KEY = open(os.path.join(BASE_DIR, 'weather4u', 'API_KEY2')).read().strip()
 
