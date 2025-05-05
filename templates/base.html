@@ -64,9 +64,9 @@
         const favicon = document.getElementById("dynamic-favicon");
         const weatherIconCode = "{{ result.icon|default:'' }}";
 
-        if (weatherIconCode) {
-            favicon.href = `https://openweathermap.org/img/wn/${weatherIconCode}.png`;
-        }
+        {% if result and result.icon %}
+        favicon.href = "https://openweathermap.org/img/wn/{{ result.icon }}.png";
+        {% endif %}
     });
 </script>
 </body>
