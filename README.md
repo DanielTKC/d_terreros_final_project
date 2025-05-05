@@ -94,7 +94,7 @@ Daniel Terreros
 * [Double underscores and Djangos ORM](https://stackoverflow.com/questions/21319832/what-do-double-underscores-indicate)
 * [The origin of the dynamic favicon](https://www.geeksforgeeks.org/how-to-change-favicon-dynamically/)
 * [Inspiration for initial development with open weather api](https://www.youtube.com/watch?v=lyeK0aE_qRg)
-* [Claude helping me identify that tailwind was blocking using default form rendering](https://claude.ai/share/4f41c908-c901-4efe-ad79-fbe7b50b716f)
-* [Claude identifying why "What to do" wasn't showing anything to do and issues with a photo](https://claude.ai/share/da423f6d-539a-473f-b43e-54ea72d4fdc3)
+* [Claude helping me identify that tailwind was blocking using default form rendering.](https://claude.ai/share/4f41c908-c901-4efe-ad79-fbe7b50b716f)
+* * [Claude identifying why "What to do" wasn't showing anything to do and issues with a photo](https://claude.ai/share/da423f6d-539a-473f-b43e-54ea72d4fdc3)
 * [Previous django project from awhile ago that helped me remember how to do some of this stuff!](https://github.com/DanielTKC/current_club)
-
+* For reference there is a php file that I also used from a previous project that I used to help me with the API calls.
