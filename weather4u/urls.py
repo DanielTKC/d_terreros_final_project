@@ -18,4 +18,5 @@ urlpatterns = [
         next_page='weather4u:index'
     ), name="login"),
     path("logout/", auth_views.LogoutView.as_view(next_page="weather4u:index"), name="logout"),
+    path("profile/", views.profile, name="profile"),
 ]

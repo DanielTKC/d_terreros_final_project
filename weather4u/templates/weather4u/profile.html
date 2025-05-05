@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Welcome, {{ user.username }}!</h2>
+<p>This is your profile page.</p>
+<a href="{% url 'weather4u:logout' %}" class="btn btn-secondary">Logout</a>
+{% endblock %}

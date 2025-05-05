@@ -29,6 +29,7 @@
         <div class="flex-none">
             {% if user.is_authenticated %}
                 <span class="text-sm mr-4">Welcome, {{ user.username }}!</span>
+                <a href="{% url 'weather4u:profile' %}" class="btn btn-link">Profile</a>
                 <form method="POST" action="{% url 'weather4u:logout' %}" style="display: inline;">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-link">Logout</button>
@@ -46,7 +47,7 @@
     <footer class="footer aligned-center sm:footer-horizontal bg-neutral text-neutral-content p-10">
         <nav>
             <h6 class="footer-title">Services</h6>
-            <a class="link link-hover">Weather</a>
+            <a href="{% url 'weather4u:five_day' %}" class="link link-hover">Weather</a>
         </nav>
         <nav>
             <h6 class="footer-title">Company</h6>

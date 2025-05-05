@@ -1,6 +1,7 @@
 import datetime
 import requests
 import pytz
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
@@ -24,6 +25,10 @@ def register(request):
 
 def home(request):
     return render(request, 'weather4u/index.html')
+
+@login_required
+def profile(request):
+    return render(request, "weather4u/profile.html")
 
 
 def weather(request):
