@@ -63,7 +63,7 @@ def what_to_wear(request):
         # Next 5 days
         for day in weather["daily"][:5]:
             dt = datetime.datetime.fromtimestamp(day["dt"], tz=local_timezone)
-            avg_temp = (day["temp"]["max"] + day["temp"]["min"]) / 1.7
+            avg_temp = (day["temp"]["max"] + day["temp"]["min"]) / 1.5
             icon = day["weather"][0]["icon"]
             desc = day["weather"][0]["description"]
 
@@ -242,7 +242,7 @@ def get_activity_recommendations(temp, condition):
     activities = Activity.objects.filter(categories__name=category_name)
     matching = []
     for activity in activities:
-        print(activity.name, activity.min_temp, activity.max_temp)
+        # print(activity.name, activity.min_temp, activity.max_temp)
 
         if activity.min_temp - 10 <= temp <= activity.max_temp:
             matching.append(activity)
